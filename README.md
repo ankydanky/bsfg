@@ -1,0 +1,2 @@
+# bsfg
+Bullshit File Generator
