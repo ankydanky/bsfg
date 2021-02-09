@@ -1,10 +1,11 @@
 # coding: utf-8
 
-__version__ = 1.0
+__version__ = 1.1
 
 import sys
 import os
 import argparse
+import time
 
 
 argpar = argparse.ArgumentParser(description=f"Bullshit File Generator | v. {__version__}")
@@ -48,7 +49,7 @@ class BSFG(object):
         return int(size_num) * multiplier
 
     def _createFile(self) -> None:
-        chunk_size = 65535
+        chunk_size = 1 * 1024 * 1024
         with open(self._fname, "wb") as fh:
             perc = 0
             written_bytes = 0
@@ -58,12 +59,12 @@ class BSFG(object):
                 if written_bytes > 0:
                     perc = round(100 / self._fsize * written_bytes)
                 fh.write(randbytes)
+                time.sleep(0.008)
                 written_bytes += chunk_size
                 if written_bytes >= self._fsize:
                     print("")
                     print("done.")
                     break
-
 
     def run(self) -> None:
         self._createFile()
